@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Видеоуроки | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ title }}</h1>
+    <p class="lead">{{ description }}</p>
+    
+    <div class="row">
+        {% for video in videos %}
+        <div class="col-lg-max col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <a href="{{ video.url }}" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> Смотреть на YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                Видеоуроки пока не добавлены
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

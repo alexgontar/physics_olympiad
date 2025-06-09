@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Главная | Олимпиадная физика{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Герой-секция с описанием -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Подготовка к олимпиадам по физике</h1>
+        <p class="lead mb-4">Бесплатные материалы для школьников 7-11 классов: теория, задачи, видеоразборы и методические пособия</p>
+    </div>
+</section>
+
+<!-- Основной контент -->
+<div class="container">
+    <!-- Карточки классов -->
+    <section id="grades" class="grades-section mb-5 mt-5">
+        <h2 class="text-center mb-4">Выберите ваш класс</h2>
+         <div class="row g-4 mb-4">
+            {% for grade in grades %}
+                {% if grade.number <= 9 %}
+                <div class="col-md-4">
+                    <a href="{% url 'grade_detail' grade.slug %}" class="text-decoration-none">
+                        <div class="card grade-card h-100 text-center p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-atom"></i>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title mb-3">{{ grade.number }} класс</h3>
+                                <button class="btn btn-primary">Перейти</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Вторая строка - классы 10-11 (2 колонки) -->
+        <div class="row g-4">
+            {% for grade in grades %}
+                {% if grade.number >= 10 %}
+                <div class="col-md-6">
+                    <a href="{% url 'grade_detail' grade.slug %}" class="text-decoration-none">
+                        <div class="card grade-card h-100 text-center p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-atom"></i>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title mb-3">{{ grade.number }} класс</h3>
+                                <button class="btn btn-primary">Перейти</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Полезные ссылки -->
+    <section class="useful-links mb-5">
+        <h2 class="text-center mb-4">Полезные ресурсы</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open fa-lg text-primary"></i>
+                    </div>
+                    <h4>Учебники</h4>
+                    <p>Подборка лучших учебников по физике</p>
+                    <a href="{% url 'textbooks' %}" class="btn btn-outline-primary">Перейти</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-video fa-lg text-primary"></i>
+                    </div>
+                    <h4>Видеоуроки</h4>
+                    <p>Коллекция обучающих видео</p>
+                    <a href="{% url 'video_lessons' %}" class="btn btn-outline-primary">Перейти</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy fa-lg text-primary"></i>
+                    </div>
+                    <h4>Архив олимпиад</h4>
+                    <p>Задачи прошлых лет с решениями</p>
+                    <a href="{% url 'olympiad_archive' %}" class="btn btn-outline-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Font Awesome для иконок -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}

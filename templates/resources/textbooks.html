@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Учебники | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ title }}</h1>
+    <p class="lead">{{ description }}</p>
+
+    <div class="row">
+        {% for book in textbooks %}
+        <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text text-muted">
+                            {{ book.get_resource_type_display }}
+                            {% if book.has_both %}(доступно онлайн и для скачивания){% endif %}
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            {% if book.file %}
+                            <a href="{{ resource.file.url }}" download class="btn btn-primary">
+                                <i class="fas fa-download me-1"></i> Скачать
+                            </a>
+                            {% endif %}
+
+                            {% if book.url %}
+                            <a href="{{ resource.url }}" target="_blank" class="btn btn-outline-primary">
+                                <i class="fas fa-external-link-alt me-1"></i> Открыть онлайн
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

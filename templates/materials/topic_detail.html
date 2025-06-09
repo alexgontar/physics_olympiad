@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ topic.title }}</h1>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+        {% for grade in topic.grades.all %}
+            <li class="breadcrumb-item">
+                <a href="{% url 'grade_detail' grade.slug %}">
+                    {{ grade.number }} класс{% if not forloop.last %}, {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+        <li class="breadcrumb-item active">{{ topic.title }}</li>
+    </ol>
+</nav>
+
+    <div class="list-group">
+        {% for resource in topic.resources.all %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ resource.title }}</h5>
+                        <p class="card-text text-muted">
+                            {{ resource.get_resource_type_display }}
+                            {% if resource.has_both %}(доступно онлайн и для скачивания){% endif %}
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            {% if resource.file %}
+                            <a href="{{ resource.file.url }}" download class="btn btn-primary">
+                                <i class="fas fa-download me-1"></i> Скачать
+                            </a>
+                            {% endif %}
+
+                            {% if resource.url %}
+                            <a href="{{ resource.url }}" target="_blank" class="btn btn-outline-primary">
+                                <i class="fas fa-external-link-alt me-1"></i> Открыть онлайн
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

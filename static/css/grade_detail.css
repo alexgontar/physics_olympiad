@@ -1,0 +1,45 @@
+    .grade-header {
+        background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+        color: white;
+        padding: 3rem 0;
+        border-radius: 15px;
+        margin-bottom: 2.5rem;
+    }
+
+    .topic-card {
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        margin-bottom: 1.5rem;
+    }
+
+    .topic-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .topic-icon {
+        font-size: 2rem;
+        color: #6a11cb;
+        margin-right: 1rem;
+    }
+
+    .resource-count {
+        background-color: #e9f0ff;
+        color: #2575fc;
+        border-radius: 20px;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .back-link {
+        color: #6a11cb;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
